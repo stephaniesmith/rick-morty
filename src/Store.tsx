@@ -11,8 +11,13 @@ const initialState: IState = {
 };
 export const Store = createContext<IState>(initialState);
 
-const reducer = () => {
-
+const reducer = (state: IState, { type, payload }: { type: string, payload: any}): IState => {
+  switch(type) {
+    case 'FETCH_Date':
+      return { ...state, episodes: payload }
+    default:
+      return state
+  }
 };
 
 export const StoreProvider = ({ children }: any): JSX.Element => {
