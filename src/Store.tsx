@@ -16,7 +16,10 @@ const reducer = (state: IState, { type, payload }: { type: string, payload: any}
     case 'FETCH_DATA':
       return { ...state, episodes: payload };
     case 'ADD_FAV':
-      return { ...state, favorites: [...state.favorites, payload]}
+      return { ...state, favorites: [...state.favorites, payload]};
+    case 'REMOVE_FAV':
+      const favorites = [...state.favorites].filter(({ id }) => id !== payload);
+      return { ...state, favorites: [...favorites]}
     default:
       return state;
   }

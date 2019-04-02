@@ -18,10 +18,15 @@ const App = (): JSX.Element => {
     })
   }
   
-  const toggleFavAction = (episode: any) => dispatch({
-    type: 'ADD_FAV',
-    payload: episode
-  })
+  const toggleFavAction = (episode: any) => {
+    const favExists = state.favorites.filter(({ id }: { id: number }) => id === episode.id).length;
+    console.log(favExists);
+    const dispatchObj = !favExists 
+      ? { type: 'ADD_FAV', payload: episode }
+      : { type: 'REMOVE_FAV', payload: episode.id };
+
+    return dispatch(dispatchObj);
+  }
 
   console.log(state);
 
