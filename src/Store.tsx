@@ -13,7 +13,7 @@ export const Store = createContext<IState | any>(initialState);
 
 const reducer = (state: IState, { type, payload }: { type: string, payload: any}): IState => {
   switch(type) {
-    case 'FETCH_Date':
+    case 'FETCH_DATA':
       return { ...state, episodes: payload };
     default:
       return state;

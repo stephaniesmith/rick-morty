@@ -1,14 +1,11 @@
 import React, { useContext, useEffect } from 'react';
 import { Store } from './Store';
-import { async } from 'q';
 
 const App = (): JSX.Element => {
   const { state, dispatch } = useContext(Store);
 
   useEffect(() => {
-    return () => {
-      state.episodes.length === 0 && fetchDataAction()
-    };
+    state.episodes.length === 0 && fetchDataAction()
   })
 
   const fetchDataAction = async() => {
@@ -20,12 +17,23 @@ const App = (): JSX.Element => {
       payload: dataJSON._embedded.episodes
     })
   }
+  {console.log(state)}
 
   return (
     <>
-      {console.log(state)}
       <h1>Rick and Morty</h1>
       <p>Pick your favorite character.</p>
+      <section>
+        {state.episodes.map(({ id, name, image, season, number }: { id: number, name: string, image: any, season: number, number: number }) => {
+          return (
+            <section key={id}>
+              <img src={image.medium} alt={`Rick & Morty ${name}`}/>
+              <h2>{name}</h2>
+              <p>Season: {season} Number: {number}</p>
+            </section>
+          )
+        })}
+      </section>
     </>
   )
 };
