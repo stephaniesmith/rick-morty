@@ -17,19 +17,30 @@ const App = (): JSX.Element => {
       payload: dataJSON._embedded.episodes
     })
   }
-  {console.log(state)}
+  
+  const toggleFavAction = (episode: any) => dispatch({
+    type: 'ADD_FAV',
+    payload: episode
+  })
+
+  console.log(state);
 
   return (
     <>
-      <h1>Rick and Morty</h1>
-      <p>Pick your favorite character.</p>
-      <section>
+      <header className="header">
+        <h1>Rick and Morty</h1>
+        <p>Pick your favorite character.</p>
+      </header>
+      <section className="episode-layout">
         {state.episodes.map(({ id, name, image, season, number }: { id: number, name: string, image: any, season: number, number: number }) => {
           return (
-            <section key={id}>
+            <section key={id} className="episode-box">
               <img src={image.medium} alt={`Rick & Morty ${name}`}/>
               <h2>{name}</h2>
-              <p>Season: {season} Number: {number}</p>
+              <section>
+                <p>Season: {season} Number: {number}</p>
+                <button type="button" onClick={() => toggleFavAction({ id, name, image, season, number })}>Fav</button>
+              </section>
             </section>
           )
         })}

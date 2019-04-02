@@ -1,8 +1,8 @@
 import React, { createContext, useReducer } from 'react';
 
 interface IState {
-  episodes: [],
-  favorites: []
+  episodes: any[],
+  favorites: any[]
 }
 
 const initialState: IState = {
@@ -15,6 +15,8 @@ const reducer = (state: IState, { type, payload }: { type: string, payload: any}
   switch(type) {
     case 'FETCH_DATA':
       return { ...state, episodes: payload };
+    case 'ADD_FAV':
+      return { ...state, favorites: [...state.favorites, payload]}
     default:
       return state;
   }
