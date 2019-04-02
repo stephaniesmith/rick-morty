@@ -33,8 +33,13 @@ const App = (): JSX.Element => {
   return (
     <>
       <header className="header">
-        <h1>Rick and Morty</h1>
-        <p>Pick your favorite character.</p>
+        <div>
+          <h1>Rick and Morty</h1>
+          <p>Pick your favorite character.</p>
+        </div>
+        <div>
+          Favorites: {state.favorites.length}
+        </div>
       </header>
       <section className="episode-layout">
         {state.episodes.map(({ id, name, image, season, number }: { id: number, name: string, image: any, season: number, number: number }) => {
@@ -44,7 +49,9 @@ const App = (): JSX.Element => {
               <h2>{name}</h2>
               <section>
                 <p>Season: {season} Number: {number}</p>
-                <button type="button" onClick={() => toggleFavAction({ id, name, image, season, number })}>Fav</button>
+                <button type="button" onClick={() => toggleFavAction({ id, name, image, season, number })}>
+                  {state.favorites.find((fav: any) => fav.id === id) ? '</3' : '<3'}
+                </button>
               </section>
             </section>
           )
