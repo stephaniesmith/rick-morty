@@ -1,8 +1,9 @@
 import React, { createContext, useReducer } from 'react';
+import { Episode } from './interfaces'
 
 interface IState {
-  episodes: any[],
-  favorites: any[]
+  episodes: Episode[],
+  favorites: Episode[]
 }
 
 const initialState: IState = {
